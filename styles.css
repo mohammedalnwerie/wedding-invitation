@@ -1,6 +1,6 @@
 /* ==========================================================================
    Wedding Invitation - Mahmoud & Layan
-   Style Sheet - Ultra-Luxury Animated & Responsive Edition
+   Style Sheet - Single Cohesive Wedding Card Header
    ========================================================================== */
 
 @import url('https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Aref+Ruqaa:wght@400;700&family=Cairo:wght@300;400;600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Reem+Kufi:wght@400;600;700&family=Tajawal:wght@300;400;500;700&display=swap');
@@ -14,7 +14,7 @@
   --primary-rose: #d49a9c;
   --primary-rose-dark: #b87b7e;
   --rose-gold: #c58c85;
-  --gold-accent: #d4af37;
+  --gold-accent: #c69214;
   --gold-dark: #8c6239;
   --gold-gradient: linear-gradient(135deg, #e6ca65 0%, #b8860b 50%, #e6ca65 100%);
   --rose-gold-gradient: linear-gradient(135deg, #e8b4b8 0%, #c58c85 50%, #9e5b66 100%);
@@ -280,66 +280,52 @@ body {
 }
 
 /* ==========================================================================
-   Unclipped Full Banner Header (Fixes image cropping completely!)
+   Cohesive Wedding Card Frame (Text OVER Floral Artwork Background)
    ========================================================================== */
-.full-banner-wrapper {
+.wedding-card-frame {
+  position: relative;
   width: 100%;
   border-radius: var(--radius-md);
   overflow: hidden;
-  box-shadow: 0 8px 25px rgba(104, 80, 87, 0.08);
-  border: 1px solid rgba(212, 175, 55, 0.35);
+  box-shadow: 0 10px 30px rgba(104, 80, 87, 0.1);
+  border: 1.5px solid rgba(212, 175, 55, 0.4);
   background: #fdfbf7;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
 }
 
-.banner-full-img {
+.banner-frame-img {
   width: 100%;
   height: auto;
   display: block;
-  object-fit: contain; /* Complete 100% image display without cutting */
+  object-fit: contain;
   border-radius: var(--radius-md);
 }
 
-/* ==========================================================================
-   Couple Title Card (Luxury Gold Shimmer)
-   ========================================================================== */
-.couple-title-card {
-  position: relative;
-  background: radial-gradient(circle at center, #ffffff 0%, #fff8fa 100%);
-  border: 1.5px solid rgba(212, 175, 55, 0.4);
-  border-radius: var(--radius-md);
-  padding: 25px 15px;
-  margin-bottom: 25px;
-  box-shadow: 0 10px 30px rgba(197, 140, 133, 0.12);
-  overflow: hidden;
-}
-
-.shimmer-line {
+.banner-frame-content {
   position: absolute;
   top: 0;
-  left: -100%;
-  width: 50%;
+  left: 0;
+  width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8), transparent);
-  transform: skewX(-25deg);
-  animation: shimmerMove 4s infinite ease-in-out;
-}
-
-@keyframes shimmerMove {
-  0% { left: -100%; }
-  30%, 100% { left: 200%; }
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 18%; /* Keeps text nicely centered between left and right floral borders */
+  text-align: center;
+  background: radial-gradient(circle at center, rgba(253, 251, 247, 0.88) 0%, rgba(253, 251, 247, 0.3) 100%);
 }
 
 .bismillah-small {
   font-family: var(--font-arabic-heading);
-  font-size: clamp(1.1rem, 3.5vw, 1.4rem);
+  font-size: clamp(0.95rem, 3.2vw, 1.35rem);
   color: var(--gold-dark);
-  margin-bottom: 5px;
+  margin-bottom: 2px;
 }
 
-.couple-names-lg {
+.couple-names-title {
   font-family: var(--font-arabic-heading);
-  font-size: clamp(2.4rem, 8vw, 3.8rem);
+  font-size: clamp(1.8rem, 6.5vw, 3.5rem);
   color: #9c6c28;
   background: var(--gold-gradient);
   -webkit-background-clip: text;
@@ -347,15 +333,16 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 15px;
+  gap: 10px;
   flex-wrap: wrap;
   line-height: 1.2;
-  margin: 8px 0;
+  margin: 4px 0;
+  text-shadow: 0 2px 4px rgba(255, 255, 255, 0.9);
 }
 
 .heart-ampersand {
   font-family: var(--font-decor-english);
-  font-size: clamp(2rem, 7vw, 3rem);
+  font-size: clamp(1.6rem, 5.5vw, 2.8rem);
   color: var(--gold-accent);
   -webkit-text-fill-color: var(--gold-accent);
   display: inline-block;
@@ -368,7 +355,7 @@ body {
 }
 
 .couple-tagline {
-  font-size: clamp(0.95rem, 3vw, 1.15rem);
+  font-size: clamp(0.85rem, 2.6vw, 1.1rem);
   color: var(--primary-rose-dark);
   font-weight: 600;
 }
@@ -383,7 +370,7 @@ body {
   border: 1px solid var(--glass-border);
   box-shadow: var(--glass-shadow);
   border-radius: var(--radius-lg);
-  padding: 22px 14px;
+  padding: 20px 12px;
   margin-bottom: 25px;
   position: relative;
   overflow: hidden;
@@ -391,7 +378,7 @@ body {
 
 @media (min-width: 600px) {
   .main-invitation-card {
-    padding: 40px 30px;
+    padding: 35px 25px;
   }
 }
 
