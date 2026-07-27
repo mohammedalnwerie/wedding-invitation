@@ -1,22 +1,23 @@
 /* ==========================================================================
    Wedding Invitation - Mahmoud & Layan
-   Script - Single YouTube Audio Player (No Secondary Background Music)
+   Script - Ultra-Luxury Animations & Features
    ========================================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
-  initPetalsCanvas();
+  initPetalsAndSparklesCanvas();
   initEnvelope();
   initCountdown();
   initAudioControls();
   initWishesForm();
   initGuestbook();
   initAutoPlayListeners();
+  initScrollReveal();
 });
 
 /* ==========================================================================
-   1. Dynamic Floating Petals Canvas
+   1. Dynamic Petals & Romantic Sparkles Canvas
    ========================================================================== */
-function initPetalsCanvas() {
+function initPetalsAndSparklesCanvas() {
   const canvas = document.getElementById('petals-canvas');
   if (!canvas) return;
   const ctx = canvas.getContext('2d');
@@ -29,8 +30,9 @@ function initPetalsCanvas() {
     height = canvas.height = window.innerHeight;
   });
 
-  const petalsCount = 35;
-  const petals = [];
+  const petalsCount = 30;
+  const sparklesCount = 20;
+  const particles = [];
 
   const petalColors = [
     'rgba(244, 227, 230, 0.75)',
@@ -39,8 +41,10 @@ function initPetalsCanvas() {
     'rgba(212, 154, 156, 0.5)'
   ];
 
+  // Petals
   for (let i = 0; i < petalsCount; i++) {
-    petals.push({
+    particles.push({
+      type: 'petal',
       x: Math.random() * width,
       y: Math.random() * height,
       size: Math.random() * 10 + 8,
@@ -49,6 +53,19 @@ function initPetalsCanvas() {
       rotation: Math.random() * Math.PI * 2,
       rotationSpeed: Math.random() * 0.02 - 0.01,
       color: petalColors[Math.floor(Math.random() * petalColors.length)]
+    });
+  }
+
+  // Golden Sparkles
+  for (let i = 0; i < sparklesCount; i++) {
+    particles.push({
+      type: 'sparkle',
+      x: Math.random() * width,
+      y: Math.random() * height,
+      size: Math.random() * 2.5 + 1.2,
+      alpha: Math.random(),
+      alphaSpeed: Math.random() * 0.02 + 0.005,
+      speedY: Math.random() * 0.4 + 0.2
     });
   }
 
@@ -65,19 +82,39 @@ function initPetalsCanvas() {
     ctx.restore();
   }
 
+  function drawSparkle(s) {
+    ctx.save();
+    ctx.fillStyle = `rgba(212, 175, 55, ${s.alpha})`;
+    ctx.beginPath();
+    ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.restore();
+  }
+
   function animate() {
     ctx.clearRect(0, 0, width, height);
 
-    petals.forEach((p) => {
-      p.y += p.speedY;
-      p.x += Math.sin(p.y * 0.01) * 0.8 + p.speedX;
-      p.rotation += p.rotationSpeed;
+    particles.forEach((p) => {
+      if (p.type === 'petal') {
+        p.y += p.speedY;
+        p.x += Math.sin(p.y * 0.01) * 0.8 + p.speedX;
+        p.rotation += p.rotationSpeed;
 
-      if (p.y > height + 20) {
-        p.y = -20;
-        p.x = Math.random() * width;
+        if (p.y > height + 20) {
+          p.y = -20;
+          p.x = Math.random() * width;
+        }
+        drawPetal(p);
+      } else {
+        p.y -= p.speedY;
+        p.alpha += p.alphaSpeed;
+        if (p.alpha > 1 || p.alpha < 0) p.alphaSpeed = -p.alphaSpeed;
+        if (p.y < -10) {
+          p.y = height + 10;
+          p.x = Math.random() * width;
+        }
+        drawSparkle(p);
       }
-      drawPetal(p);
     });
 
     requestAnimationFrame(animate);
@@ -87,7 +124,26 @@ function initPetalsCanvas() {
 }
 
 /* ==========================================================================
-   2. 3D Envelope Opening Interaction
+   2. Scroll Reveal Animations (IntersectionObserver)
+   ========================================================================== */
+function initScrollReveal() {
+  const elements = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+        }
+      });
+    },
+    { threshold: 0.15 }
+  );
+
+  elements.forEach((el) => observer.observe(el));
+}
+
+/* ==========================================================================
+   3. 3D Envelope Opening Interaction
    ========================================================================== */
 function initEnvelope() {
   const wrapper = document.getElementById('envelope-wrapper');
@@ -105,6 +161,8 @@ function initEnvelope() {
     setTimeout(() => {
       overlay.classList.add('opened');
       if (mainApp) mainApp.classList.add('visible');
+      // Trigger initial scroll reveals
+      setTimeout(initScrollReveal, 300);
     }, 1100);
   }
 
@@ -112,7 +170,7 @@ function initEnvelope() {
 }
 
 /* ==========================================================================
-   3. Live Countdown Timer
+   4. Live Countdown Timer
    ========================================================================== */
 function initCountdown() {
   // Wedding Date: July 30, 2026 17:00:00
@@ -153,13 +211,12 @@ function initCountdown() {
 }
 
 /* ==========================================================================
-   4. EXCLUSIVE YouTube Audio Player ONLY (Video ID: qsrqBFJ1WN8)
+   5. EXCLUSIVE YouTube Audio Player ONLY (Video ID: qsrqBFJ1WN8)
    ========================================================================== */
 let ytPlayer = null;
 let isYtReady = false;
 let isPlaying = false;
 
-// Global YouTube API Ready Callback
 window.onYouTubeIframeAPIReady = function () {
   try {
     ytPlayer = new YT.Player('youtube-player', {
@@ -254,7 +311,7 @@ function pauseMusic() {
 }
 
 /* ==========================================================================
-   5. Optional Wishes Form Handling & Confetti
+   6. Optional Wishes Form Handling & Confetti
    ========================================================================== */
 function initWishesForm() {
   const form = document.getElementById('wishes-form');
@@ -297,7 +354,7 @@ function triggerConfetti() {
 }
 
 /* ==========================================================================
-   6. Guestbook Features (LocalStorage Persistent)
+   7. Guestbook Features (LocalStorage Persistent)
    ========================================================================== */
 const defaultGreetings = [
   {
@@ -363,7 +420,7 @@ function escapeHtml(text) {
 }
 
 /* ==========================================================================
-   7. Toast Notification Utility
+   8. Toast Notification Utility
    ========================================================================== */
 function showToast(msg) {
   const toast = document.getElementById('toast-msg');
