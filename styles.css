@@ -1,6 +1,6 @@
 /* ==========================================================================
    Wedding Invitation - Mahmoud & Layan
-   Style Sheet - Pastel Floral & Rose Gold Theme (Custom Banner Matching User Sample)
+   Style Sheet - Fully Responsive Across All Devices (Mobile, Tablet, Desktop)
    ========================================================================== */
 
 @import url('https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Aref+Ruqaa:wght@400;700&family=Cairo:wght@300;400;600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Reem+Kufi:wght@400;600;700&family=Tajawal:wght@300;400;500;700&display=swap');
@@ -24,17 +24,17 @@
   --text-gold: #8c6239;
   --text-light: #8e7a82;
   
-  --glass-bg: rgba(255, 255, 255, 0.92);
+  --glass-bg: rgba(255, 255, 255, 0.94);
   --glass-border: rgba(197, 140, 133, 0.3);
-  --glass-shadow: 0 15px 40px rgba(104, 80, 87, 0.08);
+  --glass-shadow: 0 12px 35px rgba(104, 80, 87, 0.08);
 
   --font-arabic-heading: 'Aref Ruqaa', 'Amiri', serif;
   --font-arabic-calligraphy: 'Reem Kufi', 'Amiri', serif;
   --font-arabic-body: 'Tajawal', 'Cairo', sans-serif;
   --font-decor-english: 'Cormorant Garamond', serif;
   
-  --radius-lg: 24px;
-  --radius-md: 16px;
+  --radius-lg: 20px;
+  --radius-md: 14px;
   --radius-sm: 10px;
 }
 
@@ -46,6 +46,7 @@
 
 html {
   scroll-behavior: smooth;
+  font-size: 16px;
 }
 
 body {
@@ -58,6 +59,7 @@ body {
   line-height: 1.8;
   position: relative;
   min-height: 100vh;
+  width: 100%;
 }
 
 /* Background Petals Canvas */
@@ -75,12 +77,19 @@ body {
 .app-container {
   position: relative;
   z-index: 2;
-  max-width: 880px;
+  width: 100%;
+  max-width: 850px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 12px 10px;
   opacity: 0;
-  transform: translateY(30px);
+  transform: translateY(20px);
   transition: opacity 1.2s ease, transform 1.2s ease;
+}
+
+@media (min-width: 480px) {
+  .app-container {
+    padding: 20px 15px;
+  }
 }
 
 .app-container.visible {
@@ -89,7 +98,7 @@ body {
 }
 
 /* ==========================================================================
-   3D Interactive Envelope Screen Overlay - Bright & Luminous Glow Theme
+   3D Interactive Envelope Screen Overlay - Fully Responsive for Mobile
    ========================================================================== */
 .envelope-overlay {
   position: fixed;
@@ -103,9 +112,9 @@ body {
   justify-content: center;
   align-items: center;
   z-index: 9999;
-  transition: opacity 1s ease, visibility 1s ease;
-  padding: 20px;
-  box-shadow: inset 0 0 120px rgba(255, 235, 238, 0.9);
+  transition: opacity 0.9s ease, visibility 0.9s ease;
+  padding: 15px;
+  box-shadow: inset 0 0 100px rgba(255, 235, 238, 0.9);
 }
 
 .envelope-overlay::before {
@@ -115,7 +124,7 @@ body {
   left: -50%;
   width: 200%;
   height: 200%;
-  background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.8) 0%, transparent 60%);
+  background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.85) 0%, transparent 60%);
   pointer-events: none;
   animation: lightGlow 4s infinite alternate ease-in-out;
 }
@@ -133,19 +142,12 @@ body {
 
 .envelope-wrapper {
   position: relative;
-  width: 340px;
-  height: 240px;
+  width: min(88vw, 420px);
+  aspect-ratio: 4 / 2.8;
   perspective: 1000px;
   cursor: pointer;
-  margin-bottom: 35px;
-  filter: drop-shadow(0 20px 40px rgba(184, 123, 126, 0.25));
-}
-
-@media (min-width: 500px) {
-  .envelope-wrapper {
-    width: 440px;
-    height: 300px;
-  }
+  margin-bottom: 25px;
+  filter: drop-shadow(0 15px 35px rgba(184, 123, 126, 0.25));
 }
 
 .envelope {
@@ -153,31 +155,24 @@ body {
   width: 100%;
   height: 100%;
   background: #ffffff;
-  border-radius: 14px;
-  box-shadow: 0 25px 60px rgba(184, 123, 126, 0.2);
+  border-radius: 12px;
+  box-shadow: 0 20px 50px rgba(184, 123, 126, 0.2);
   border: 2px solid rgba(232, 180, 184, 0.6);
+  overflow: hidden;
 }
 
 .envelope-flap {
   position: absolute;
   top: 0;
   left: 0;
-  width: 0;
+  width: 100%;
   height: 0;
-  border-left: 170px solid transparent;
-  border-right: 170px solid transparent;
-  border-top: 130px solid #f9ecee;
+  border-left: min(44vw, 210px) solid transparent;
+  border-right: min(44vw, 210px) solid transparent;
+  border-top: min(32vw, 155px) solid #f9ecee;
   transform-origin: top center;
   transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
   z-index: 4;
-}
-
-@media (min-width: 500px) {
-  .envelope-flap {
-    border-left-width: 220px;
-    border-right-width: 220px;
-    border-top-width: 165px;
-  }
 }
 
 .envelope-wrapper.open .envelope-flap {
@@ -189,21 +184,13 @@ body {
   position: absolute;
   bottom: 0;
   left: 0;
-  width: 0;
+  width: 100%;
   height: 0;
-  border-left: 170px solid #faebed;
-  border-right: 170px solid #faebed;
-  border-bottom: 125px solid #f4dedb;
-  border-radius: 0 0 14px 14px;
+  border-left: min(44vw, 210px) solid #faebed;
+  border-right: min(44vw, 210px) solid #faebed;
+  border-bottom: min(30vw, 145px) solid #f4dedb;
+  border-radius: 0 0 12px 12px;
   z-index: 3;
-}
-
-@media (min-width: 500px) {
-  .envelope-pocket {
-    border-left-width: 220px;
-    border-right-width: 220px;
-    border-bottom-width: 160px;
-  }
 }
 
 .wax-seal {
@@ -211,11 +198,11 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -40%);
-  width: 90px;
-  height: 90px;
+  width: clamp(65px, 18vw, 90px);
+  height: clamp(65px, 18vw, 90px);
   border-radius: 50%;
   background: radial-gradient(circle at 35% 35%, #f4c2c5 0%, #c58c85 60%, #9e5b66 100%);
-  box-shadow: 0 10px 30px rgba(158, 91, 102, 0.4), 0 0 20px rgba(255, 255, 255, 0.8);
+  box-shadow: 0 8px 25px rgba(158, 91, 102, 0.4), 0 0 18px rgba(255, 255, 255, 0.8);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -234,56 +221,58 @@ body {
 }
 
 .wax-seal:hover {
-  transform: translate(-50%, -40%) scale(1.1);
-  box-shadow: 0 15px 35px rgba(158, 91, 102, 0.5), 0 0 30px rgba(255, 255, 255, 1);
+  transform: translate(-50%, -40%) scale(1.08);
 }
 
 .envelope-wrapper.open .wax-seal {
-  transform: translate(-50%, -40%) scale(0.5);
+  transform: translate(-50%, -40%) scale(0.4);
   opacity: 0;
 }
 
 .tap-prompt {
-  font-size: 1.25rem;
+  font-size: clamp(0.95rem, 4vw, 1.2rem);
   font-weight: 700;
   color: var(--primary-rose-dark);
   font-family: var(--font-arabic-body);
   display: flex;
   align-items: center;
-  gap: 12px;
+  justify-content: center;
+  gap: 10px;
   background: rgba(255, 255, 255, 0.95);
-  padding: 12px 28px;
+  padding: 10px 22px;
   border-radius: 30px;
   box-shadow: 0 8px 25px rgba(184, 123, 126, 0.2);
   border: 1px solid rgba(232, 180, 184, 0.5);
   animation: pulsePrompt 2s infinite ease-in-out;
   position: relative;
   z-index: 10;
+  max-width: 90vw;
 }
 
 @keyframes pulsePrompt {
   0%, 100% { transform: scale(1); box-shadow: 0 8px 25px rgba(184, 123, 126, 0.2); }
-  50% { transform: scale(1.05); box-shadow: 0 12px 35px rgba(184, 123, 126, 0.35); }
+  50% { transform: scale(1.04); box-shadow: 0 12px 30px rgba(184, 123, 126, 0.35); }
 }
 
 /* ==========================================================================
-   Custom Watercolor Invitation Banner (Matching User Reference Image)
+   Custom Watercolor Invitation Banner (Responsive Fluid Scaling)
    ========================================================================== */
 .custom-invitation-banner {
   position: relative;
   width: 100%;
   border-radius: var(--radius-md);
   overflow: hidden;
-  box-shadow: 0 12px 30px rgba(104, 80, 87, 0.08);
+  box-shadow: 0 8px 25px rgba(104, 80, 87, 0.08);
   border: 1px solid rgba(212, 175, 55, 0.3);
-  margin-bottom: 35px;
+  margin-bottom: 25px;
   background: #fcf9f2;
 }
 
 .banner-bg-img {
   width: 100%;
   height: 100%;
-  min-height: 240px;
+  min-height: 200px;
+  max-height: 320px;
   object-fit: cover;
   display: block;
   opacity: 0.92;
@@ -299,54 +288,51 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 25px 20px;
+  padding: 15px 10px;
   text-align: center;
-  background: radial-gradient(circle at center, rgba(253, 251, 247, 0.75) 0%, rgba(253, 251, 247, 0.15) 100%);
+  background: radial-gradient(circle at center, rgba(253, 251, 247, 0.8) 0%, rgba(253, 251, 247, 0.2) 100%);
 }
 
 .bismillah-small {
   font-family: var(--font-arabic-heading);
-  font-size: 1.3rem;
+  font-size: clamp(1rem, 3.5vw, 1.3rem);
   color: var(--gold-dark);
-  margin-bottom: 5px;
+  margin-bottom: 2px;
 }
 
 .banner-couple-names {
   font-family: var(--font-arabic-heading);
-  font-size: 3.2rem;
+  font-size: clamp(2rem, 7vw, 3.2rem);
   color: #9c6c28;
   text-shadow: 0 2px 4px rgba(255, 255, 255, 0.9);
-  margin: 5px 0;
-  letter-spacing: 1px;
-}
-
-@media (max-width: 500px) {
-  .banner-couple-names {
-    font-size: 2.2rem;
-  }
+  margin: 4px 0;
+  line-height: 1.2;
 }
 
 .banner-subtext {
   font-family: var(--font-arabic-body);
-  font-size: 1.15rem;
+  font-size: clamp(0.95rem, 3vw, 1.15rem);
   color: #685057;
   font-weight: 500;
-  margin-bottom: 12px;
+  margin-bottom: 8px;
 }
 
 .banner-date-badge {
   font-family: var(--font-arabic-body);
-  font-size: 1.05rem;
+  font-size: clamp(0.85rem, 2.8vw, 1.02rem);
   font-weight: 700;
   color: #8c6239;
   display: flex;
   align-items: center;
-  gap: 10px;
-  background: rgba(255, 255, 255, 0.85);
-  padding: 6px 18px;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 5px 14px;
   border-radius: 20px;
   border: 1px solid rgba(198, 146, 20, 0.3);
-  margin-bottom: 10px;
+  margin-bottom: 6px;
+  max-width: 95%;
 }
 
 .banner-date-badge .dot {
@@ -354,9 +340,11 @@ body {
 }
 
 .banner-venue-badge {
-  font-size: 0.98rem;
+  font-size: clamp(0.85rem, 2.6vw, 0.98rem);
   font-weight: 600;
   color: var(--primary-rose-dark);
+  padding: 0 5px;
+  word-break: break-word;
 }
 
 /* ==========================================================================
@@ -369,50 +357,49 @@ body {
   border: 1px solid var(--glass-border);
   box-shadow: var(--glass-shadow);
   border-radius: var(--radius-lg);
-  padding: 35px 20px;
-  margin-bottom: 35px;
+  padding: 22px 14px;
+  margin-bottom: 25px;
   position: relative;
   overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 600px) {
   .card {
-    padding: 50px 40px;
+    padding: 40px 30px;
   }
 }
 
 .bismillah {
   font-family: var(--font-arabic-heading);
-  font-size: 2.2rem;
+  font-size: clamp(1.6rem, 5vw, 2.2rem);
   color: var(--primary-rose-dark);
-  margin-bottom: 15px;
+  margin-bottom: 12px;
 }
 
 .quran-verse {
   font-family: var(--font-arabic-heading);
-  font-size: 1.25rem;
+  font-size: clamp(1.05rem, 3.5vw, 1.25rem);
   color: var(--text-medium);
   background: rgba(244, 227, 230, 0.45);
-  padding: 18px 25px;
+  padding: 14px 16px;
   border-radius: var(--radius-md);
   border-right: 4px solid var(--rose-gold);
-  margin: 20px 0 30px;
-  line-height: 2;
+  margin: 18px 0 25px;
+  line-height: 1.9;
 }
 
 .invitation-intro {
-  font-size: 1.15rem;
+  font-size: clamp(1rem, 3vw, 1.15rem);
   color: var(--text-medium);
-  margin-bottom: 25px;
+  margin-bottom: 20px;
 }
 
 .parents-names {
-  font-size: 1.2rem;
+  font-size: clamp(1.05rem, 3.2vw, 1.2rem);
   font-weight: 600;
   color: var(--text-dark);
-  margin: 15px 0 25px;
-  line-height: 2;
+  margin: 15px 0 20px;
+  line-height: 1.9;
 }
 
 .parents-names span {
@@ -421,24 +408,25 @@ body {
 }
 
 .invitation-message {
-  font-size: 1.1rem;
+  font-size: clamp(0.98rem, 3vw, 1.1rem);
   color: var(--text-medium);
   max-width: 600px;
-  margin: 0 auto 30px;
+  margin: 0 auto 25px;
+  line-height: 1.8;
 }
 
 /* ==========================================================================
-   Countdown Timer Section
+   Countdown Timer Section (Responsive Grid)
    ========================================================================== */
 .countdown-section {
-  margin: 40px 0;
+  margin: 30px 0;
 }
 
 .section-title {
   font-family: var(--font-arabic-heading);
-  font-size: 2rem;
+  font-size: clamp(1.5rem, 4.5vw, 2rem);
   color: var(--primary-rose-dark);
-  margin-bottom: 25px;
+  margin-bottom: 20px;
   position: relative;
   display: inline-block;
 }
@@ -446,10 +434,10 @@ body {
 .section-title::after {
   content: '';
   position: absolute;
-  bottom: -8px;
+  bottom: -6px;
   left: 50%;
   transform: translateX(-50%);
-  width: 60px;
+  width: 50px;
   height: 2px;
   background: var(--rose-gold-gradient);
   border-radius: 2px;
@@ -458,98 +446,92 @@ body {
 .countdown-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 15px;
-  margin-top: 20px;
+  gap: 10px;
+  margin-top: 15px;
 }
 
-@media (max-width: 500px) {
+@media (max-width: 480px) {
   .countdown-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
+    gap: 10px;
   }
 }
 
 .timer-box {
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.92);
   border: 1px solid var(--glass-border);
   border-radius: var(--radius-md);
-  padding: 20px 10px;
-  box-shadow: 0 8px 20px rgba(104, 80, 87, 0.05);
+  padding: 14px 8px;
+  box-shadow: 0 6px 16px rgba(104, 80, 87, 0.05);
   display: flex;
   flex-direction: column;
   align-items: center;
-  transition: transform 0.3s ease;
-}
-
-.timer-box:hover {
-  transform: translateY(-5px);
 }
 
 .timer-value {
-  font-size: 2.2rem;
+  font-size: clamp(1.6rem, 5vw, 2.2rem);
   font-weight: 800;
   color: var(--primary-rose-dark);
   font-family: var(--font-arabic-body);
-  line-height: 1.2;
+  line-height: 1.1;
 }
 
 .timer-label {
-  font-size: 0.95rem;
+  font-size: clamp(0.85rem, 2.5vw, 0.95rem);
   color: var(--text-medium);
-  margin-top: 6px;
+  margin-top: 4px;
 }
 
 /* ==========================================================================
-   Event Details Section
+   Event Details Section (Cards Grid)
    ========================================================================== */
 .details-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 25px;
-  margin: 30px 0;
+  grid-template-columns: 1fr;
+  gap: 15px;
+  margin: 25px 0;
+}
+
+@media (min-width: 580px) {
+  .details-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
 }
 
 .detail-card {
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.92);
   border: 1px solid var(--glass-border);
   border-radius: var(--radius-md);
-  padding: 30px 20px;
+  padding: 22px 15px;
   text-align: center;
-  box-shadow: 0 10px 25px rgba(104, 80, 87, 0.05);
+  box-shadow: 0 8px 20px rgba(104, 80, 87, 0.05);
 }
 
 .detail-icon {
-  width: 60px;
-  height: 60px;
-  margin: 0 auto 15px;
+  width: 52px;
+  height: 52px;
+  margin: 0 auto 12px;
   border-radius: 50%;
   background: var(--bg-dusty-rose);
   color: var(--primary-rose-dark);
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 1.6rem;
+  font-size: 1.4rem;
 }
 
 .detail-card h3 {
   font-family: var(--font-arabic-heading);
-  font-size: 1.5rem;
+  font-size: clamp(1.3rem, 4vw, 1.5rem);
   color: var(--primary-rose-dark);
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 }
 
 .detail-card p {
   color: var(--text-medium);
-  font-size: 1.1rem;
-  margin-bottom: 15px;
-}
-
-.btn-group {
-  display: flex;
-  justify-content: center;
-  gap: 15px;
-  flex-wrap: wrap;
-  margin-top: 20px;
+  font-size: clamp(1rem, 3vw, 1.1rem);
+  margin-bottom: 12px;
 }
 
 .btn {
@@ -557,27 +539,23 @@ body {
   align-items: center;
   justify-content: center;
   gap: 8px;
-  padding: 12px 24px;
+  padding: 10px 20px;
   border-radius: 30px;
   font-family: var(--font-arabic-body);
-  font-size: 1rem;
+  font-size: clamp(0.9rem, 2.8vw, 1rem);
   font-weight: 600;
   text-decoration: none;
   cursor: pointer;
   transition: all 0.3s ease;
   border: none;
   outline: none;
+  max-width: 100%;
 }
 
 .btn-primary {
   background: var(--rose-gold-gradient);
   color: #fff;
-  box-shadow: 0 6px 20px rgba(197, 140, 133, 0.4);
-}
-
-.btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 25px rgba(197, 140, 133, 0.6);
+  box-shadow: 0 6px 18px rgba(197, 140, 133, 0.4);
 }
 
 .btn-outline {
@@ -586,50 +564,40 @@ body {
   border: 1.5px solid var(--rose-gold);
 }
 
-.btn-outline:hover {
-  background: var(--bg-dusty-rose);
-  transform: translateY(-2px);
-}
-
 /* ==========================================================================
    RSVP / Wishes Form Section
    ========================================================================== */
 .rsvp-form {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 16px;
   text-align: right;
-  margin-top: 20px;
+  margin-top: 15px;
 }
 
 .form-group {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 6px;
 }
 
 .form-group label {
-  font-size: 1.05rem;
+  font-size: clamp(0.95rem, 2.8vw, 1.05rem);
   font-weight: 600;
   color: var(--text-dark);
 }
 
 .form-control {
   width: 100%;
-  padding: 14px 18px;
+  padding: 12px 14px;
   border-radius: var(--radius-sm);
   border: 1px solid var(--rose-gold);
   background: rgba(255, 255, 255, 0.95);
   font-family: var(--font-arabic-body);
-  font-size: 1rem;
+  font-size: clamp(0.95rem, 2.8vw, 1rem);
   color: var(--text-dark);
   outline: none;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-.form-control:focus {
-  border-color: var(--primary-rose-dark);
-  box-shadow: 0 0 0 4px rgba(212, 154, 156, 0.2);
 }
 
 /* ==========================================================================
@@ -638,18 +606,18 @@ body {
 .guestbook-list {
   display: flex;
   flex-direction: column;
-  gap: 15px;
-  margin-top: 30px;
-  max-height: 380px;
+  gap: 12px;
+  margin-top: 20px;
+  max-height: 350px;
   overflow-y: auto;
-  padding-left: 5px;
+  padding-left: 3px;
 }
 
 .guestbook-card {
   background: rgba(255, 255, 255, 0.95);
   border: 1px solid rgba(197, 140, 133, 0.25);
   border-radius: var(--radius-sm);
-  padding: 18px 20px;
+  padding: 14px 16px;
   text-align: right;
   box-shadow: 0 4px 12px rgba(104, 80, 87, 0.04);
 }
@@ -657,19 +625,20 @@ body {
 .guest-name {
   font-weight: 700;
   color: var(--primary-rose-dark);
-  font-size: 1.1rem;
-  margin-bottom: 5px;
+  font-size: 1.05rem;
+  margin-bottom: 4px;
 }
 
 .guest-msg {
   color: var(--text-medium);
-  font-size: 1rem;
+  font-size: 0.98rem;
+  line-height: 1.6;
 }
 
 .guest-time {
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   color: var(--text-light);
-  margin-top: 8px;
+  margin-top: 6px;
 }
 
 /* ==========================================================================
@@ -677,25 +646,22 @@ body {
    ========================================================================== */
 .audio-control {
   position: fixed;
-  bottom: 25px;
-  left: 25px;
-  width: 50px;
-  height: 50px;
+  bottom: 20px;
+  left: 20px;
+  width: clamp(44px, 12vw, 52px);
+  height: clamp(44px, 12vw, 52px);
   border-radius: 50%;
   background: var(--rose-gold-gradient);
   color: #fff;
   display: flex;
   justify-content: center;
   align-items: center;
-  box-shadow: 0 8px 20px rgba(197, 140, 133, 0.5);
+  box-shadow: 0 6px 18px rgba(197, 140, 133, 0.5);
   cursor: pointer;
-  z-index: 999;
+  z-index: 9999;
   transition: transform 0.3s ease;
   border: 2px solid #fff;
-}
-
-.audio-control:hover {
-  transform: scale(1.1);
+  font-size: clamp(1rem, 3.5vw, 1.2rem);
 }
 
 .audio-control.playing {
@@ -710,18 +676,24 @@ body {
 /* Toast Message */
 .toast-msg {
   position: fixed;
-  bottom: 30px;
-  right: 30px;
+  bottom: 25px;
+  right: 20px;
+  left: 20px;
+  margin: 0 auto;
+  max-width: 400px;
   background: var(--primary-rose-dark);
   color: #fff;
-  padding: 15px 25px;
+  padding: 12px 20px;
   border-radius: 30px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
   z-index: 10000;
   opacity: 0;
   transform: translateY(20px);
   transition: all 0.4s ease;
   font-weight: 600;
+  font-size: 0.95rem;
+  text-align: center;
+  pointer-events: none;
 }
 
 .toast-msg.show {
@@ -731,9 +703,9 @@ body {
 
 /* Footer */
 footer {
-  margin-top: 40px;
-  padding: 20px 0;
+  margin-top: 30px;
+  padding: 15px 0;
   color: var(--text-light);
-  font-size: 0.95rem;
+  font-size: 0.88rem;
   border-top: 1px solid var(--glass-border);
 }
