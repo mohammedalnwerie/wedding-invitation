@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>دعوة زفاف محمود & ليان | عائلة العامودي</title>
+  <meta name="description" content="يتشرف السيد محمد زكي العامودي والسيد أشرف محمد العامودي بدعوتكم لحضور حفل زفاف ولديهما محمود وليان">
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="styles.css">
+  
+  <!-- FontAwesome for Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Canvas Confetti CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+  <!-- YouTube IFrame API -->
+  <script src="https://www.youtube.com/iframe_api"></script>
+</head>
+<body>
+
+  <!-- Hidden YouTube Audio Player Container -->
+  <div id="youtube-player" style="position: absolute; top: -9999px; left: -9999px; width: 1px; height: 1px; opacity: 0; pointer-events: none;"></div>
+
+  <!-- Floating Petals Canvas -->
+  <canvas id="petals-canvas"></canvas>
+
+  <!-- Floating Audio Control Button -->
+  <button id="audio-toggle" class="audio-control" title="تشغيل / إيقاف الموسيقى">
+    <i class="fa-solid fa-music"></i>
+  </button>
+
+  <!-- Toast Notification Container -->
+  <div id="toast-msg" class="toast-msg"></div>
+
+  <!-- ==========================================================================
+       3D Interactive Envelope Overlay (Screen 1)
+       ========================================================================== -->
+  <div id="envelope-overlay" class="envelope-overlay">
+    <div id="envelope-wrapper" class="envelope-wrapper">
+      <div class="envelope">
+        <div class="envelope-flap"></div>
+        <div class="wax-seal">
+          <img src="assets/wax_seal.jpg" alt="M & L Wax Seal">
+        </div>
+        <div class="envelope-pocket"></div>
+      </div>
+    </div>
+    <div class="tap-prompt">
+      <i class="fa-solid fa-hand-pointer"></i>
+      انقر على الختم الشمعي لفتح دعوة الزفاف
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       Main Application Container (Screen 2)
+       ========================================================================== -->
+  <div id="main-app" class="app-container">
+
+    <!-- Primary Card Wrapper -->
+    <main class="card">
+
+      <!-- Custom Watercolor Floral Banner (Inspired by User Sample) -->
+      <div class="custom-invitation-banner">
+        <img src="assets/floral_header.jpg" alt="Floral Banner Background" class="banner-bg-img">
+        <div class="banner-overlay-content">
+          <div class="bismillah-small">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</div>
+          <h1 class="banner-couple-names">محمود &amp; ليان</h1>
+          <p class="banner-subtext">يتشرفان بدعوتكم لمشاركتهما فرحة حفل زفافهما</p>
+          <div class="banner-date-badge">
+            <span>الخميس، 30 تموز / يوليو 2026</span>
+            <span class="dot">•</span>
+            <span>الساعة 5:00 مساءً</span>
+          </div>
+          <div class="banner-venue-badge">
+            <i class="fa-solid fa-location-dot"></i> صالة الأميرة - الشيخ رضوان مقابل بوظة أبو زيتونة
+          </div>
+        </div>
+      </div>
+
+      <!-- Quranic Verse -->
+      <blockquote class="quran-verse">
+        ﴿ وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً ﴾
+      </blockquote>
+
+      <!-- Invitation Intro -->
+      <p class="invitation-intro">
+        بكل معاني الود والمحبة والتقدير، يسعدنا ويشرفنا أن تشاركونا فرحتنا الكبرى
+      </p>
+
+      <!-- Parents Names -->
+      <div class="parents-names">
+        يتشرف كلٌّ من
+        <span>السيد محمد زكي العامودي</span>
+        و
+        <span>السيد أشرف محمد العامودي</span>
+        بدعوتكم لحضور حفل زفاف ولديهما العزيزين
+      </div>
+
+      <!-- Invitation Message Poem -->
+      <p class="invitation-message">
+        وتكتملُ الفرحةُ بـلُقياكم، وتزدانُ ليلتُنا ببهيِّ حُضوركم.. 🌸<br>
+        حضورُكم شرفٌ لنا، وعُطرٌ يفوح في مجالسِ الفرح والسرور.
+      </p>
+
+      <!-- Countdown Timer Section -->
+      <section class="countdown-section">
+        <h2 class="section-title">المتبقي على ليلة الفرح</h2>
+        <div class="countdown-grid">
+          <div class="timer-box">
+            <span id="days" class="timer-value">00</span>
+            <span class="timer-label">أيام</span>
+          </div>
+          <div class="timer-box">
+            <span id="hours" class="timer-value">00</span>
+            <span class="timer-label">ساعات</span>
+          </div>
+          <div class="timer-box">
+            <span id="minutes" class="timer-value">00</span>
+            <span class="timer-label">دقائق</span>
+          </div>
+          <div class="timer-box">
+            <span id="seconds" class="timer-value">00</span>
+            <span class="timer-label">ثواني</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Event Details Grid -->
+      <section class="details-grid">
+        <!-- Date Card -->
+        <div class="detail-card">
+          <div class="detail-icon">
+            <i class="fa-regular fa-calendar-check"></i>
+          </div>
+          <h3>موعد الحفل</h3>
+          <p><strong>يوم الخميس</strong><br>30 تموز / يوليو 2026</p>
+          <p><i class="fa-regular fa-clock"></i> الساعة 5:00 مساءً</p>
+          <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=%DD8%AD%D9%81%D9%84+%D8%B2%D9%81%D8%A7%D9%81+%D9%85%D8%AD%D9%85%D9%88%D8%AF+%D9%88%D9%84%D9%8A%D8%A7%D9%86&dates=20260730T140000Z/20260730T180000Z&details=%D9%8A%D8%AA%D8%B4%D8%B1%D9%81+%D8%A7%D9%84%D8%B3%D9%8A%D8%AF+%D9%85%D8%AD%D9%85%D9%88%D8%AF+%D8%B2%D9%83%D9%8A+%D8%A7%D9%84%D8%B9%D8%A7%D9%85%D9%88%D8%AF%D9%8A+%D9%88%D8%A7%D9%84%D8%B3%D9%8A%D8%AF+%D8%A3%D8%B4%D8%B1%D9%81+%D9%85%D8%AD%D9%85%D9%88%D8%AF+%D8%A7%D9%84%D8%B9%D8%A7%D9%85%D9%88%D8%AF%D9%8A+%D8%A8%D8%AF%D8%B9%D9%88%D8%AA%D9%83%D9%85&location=%D8%B5%D8%A7%D9%84%D8%A9+%D8%A7%D9%84%D8%A3%D9%85%D9%8A%D8%B1%D8%A9+-+%D8%A7%D9%84%D8%B4%D9%8A%D8%AE+%D8%B1%D8%B6%D9%88%D8%A7%D9%86+%D9%85%D9%82%D8%A7%D8%A8%D9%84+%D8%A8%D9%88%D8%B8%D8%A9+%D8%A3%D8%A8%D9%88+%D8%B2%D9%8A%D8%AA%D9%88%D9%86%D8%A9" target="_blank" class="btn btn-outline" style="margin-top: 10px;">
+            <i class="fa-solid fa-calendar-plus"></i> إضافة إلى التقويم
+          </a>
+        </div>
+
+        <!-- Venue Card -->
+        <div class="detail-card">
+          <div class="detail-icon">
+            <i class="fa-solid fa-location-dot"></i>
+          </div>
+          <h3>مكان الحفل</h3>
+          <p style="font-size: 1.35rem; color: var(--primary-rose-dark);"><strong>صالة الأميرة</strong></p>
+          <p style="font-size: 1.15rem; color: var(--text-medium); font-weight: 600;">الشيخ رضوان - مقابل بوظة أبو زيتونة</p>
+          <p style="font-size: 0.95rem; color: var(--text-light); margin-top: 10px;">
+            <i class="fa-solid fa-heart" style="color: var(--rose-gold);"></i> أهلاً وسهلاً بكم في ليلة عمرنا
+          </p>
+        </div>
+      </section>
+
+      <!-- Congratulations Message Section (Optional) -->
+      <section style="margin-top: 50px;">
+        <h2 class="section-title">إهداء وتهنئة للعروسين</h2>
+        <p style="color: var(--text-medium); margin-bottom: 20px;">يمكنك ترك كلمة تهنئة مباركة للعروسين محمود وليان (اختياري)</p>
+
+        <form id="wishes-form" class="rsvp-form">
+          <div class="form-group">
+            <label for="guest-name-input"><i class="fa-solid fa-user"></i> الاسم الكريم</label>
+            <input type="text" id="guest-name-input" class="form-control" placeholder="أدخل اسمك الكريم (اختياري)...">
+          </div>
+
+          <div class="form-group">
+            <label for="guest-msg-input"><i class="fa-solid fa-heart"></i> رسالة التهنئة</label>
+            <textarea id="guest-msg-input" class="form-control" rows="3" placeholder="اكتب كلمة تهنئة أو مباركة للعروسين..."></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-primary" style="font-size: 1.1rem; padding: 14px 28px; align-self: center; margin-top: 10px;">
+            <i class="fa-solid fa-paper-plane"></i> إرسال التهنئة ✨
+          </button>
+        </form>
+      </section>
+
+      <!-- Digital Guestbook Section -->
+      <section style="margin-top: 50px;">
+        <h2 class="section-title">دفتر التهاني والمباركات</h2>
+        <div id="guestbook-list" class="guestbook-list">
+          <!-- Dynamic Guestbook Entries -->
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <footer>
+        <p>دامت دياركم عامرة بالأفراح والمسرّات ✨</p>
+        <p style="font-size: 0.85rem; margin-top: 5px;">دعوة زفاف رقمية تفاعلية للعروسين محمود & ليان العامودي</p>
+      </footer>
+
+    </main>
+
+  </div>
+
+  <!-- Scripts -->
+  <script src="script.js"></script>
+</body>
+</html>
